@@ -1,0 +1,44 @@
+<h1>Lieferanteninformationen </h1>
+
+<div *ngIf="loggedUser else default">
+
+
+<div class ="frame">
+  <h3> Profildaten </h3>
+    <h4>Unternehmen: </h4>
+        {{ loggedUser.company_name }} als <span *ngIf="loggedUser.role=='production' else transport"> Produktionsanbieter. </span> <ng-template #transport> Transportdienstleister. </ng-template>
+    <h4>Adresse:</h4>
+      <div>
+        {{ loggedUser.company_address.nb }} {{ loggedUser.company_address.street }}, {{ loggedUser.company_address.postal_code }} {{ loggedUser.company_address.city }}
+      </div>
+
+  <div class="userPrices">
+    <h3>Preis- und Kapazitätsinformationen </h3>
+    <ng-container *ngFor="let mach of categories; let i=index"> 
+      <h4>{{ machine_eq[mach] }}</h4>
+    <ng-container *ngFor="let item of capa_obj[mach]" > 
+      <span class="higherWeight"> Standardpreis: </span> {{ item.default_price }} <span *ngIf="loggedUser.role=='production' else transportPrice"> €/Minute </span> <ng-template #transportPrice> €/km </ng-template> <br/>
+      <span *ngIf="loggedUser.role=='transport'"> <span class="higherWeight"> Minimalpreis: </span> {{ item.min_price }} € </span> 
+      <div class="inlineH">
+        <div *ngFor="let disc of item.discounts" class="discount">
+         <div *ngIf="disc.date"> 
+           <span class="higherWeight">Datum: </span> {{ disc.date }} <br/>
+           <span class="higherWeight">Aufschlag (in %): </span> {{ disc.percentage }}
+          </div>
+       </div>
+     </div>
+      </ng-container>
+    </ng-container>
+  <br/>
+  <button type="button" class="nomargin" (click)="goToPriceManagement()"> Preis und Aufschläge aktualisieren </button>
+
+  </div>
+</div>
+<div class="center marginTop">
+  <button (click)="onSignOut()">Abmelden</button>
+</div>
+</div>
+
+<ng-template #default> Welcome ! You first need to login to access this page.
+</ng-template>
+

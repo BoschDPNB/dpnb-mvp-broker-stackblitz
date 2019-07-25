@@ -1,0 +1,21 @@
+.marginTop{
+  margin-top:10px;
+}
+
+.inlineH{
+  display: -webkit-flex;
+	display:flex;
+	-webkit-flex-direction:wrap;
+	flex-wrap:wrap;
+	justify-content: flex-start;
+	text-align:center;
+  -webkit-align-items:center;
+	align-items:center;
+}
+
+.inlineH .discount{
+	width:32%;
+	text-align:left;
+	margin-top:10px;
+
+}

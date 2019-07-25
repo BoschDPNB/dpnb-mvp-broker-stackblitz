@@ -1,0 +1,238 @@
+/* Add application styles & imports to this file! */
+
+body{
+   font-family: "Segoe UI", Verdana;
+}
+
+img{
+	float:left;
+}
+
+h1{
+	clear: both;
+	text-align:center;
+	font-weight: 600;
+	color: rgb(19, 98, 148);
+  margin-top: 60px;
+}
+
+h3, h4{
+	font-weight: 600;
+}
+
+.frame{
+  margin: 0 auto;
+  width: 800px;
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+
+.noborder{
+  border: none;
+}
+
+form {
+  margin: 0 auto ;
+  width: 800px;
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+
+}
+
+.frame form{
+  margin:0;
+  padding:0;
+}
+
+form .text div + div {
+  margin-top: 1em;
+}
+
+.center{
+  text-align:center;
+}
+
+label {
+  display: inline-block;
+  width: 250px;
+  text-align: right;
+  vertical-align:top;
+}
+
+label.onTheLeft {
+  width:25%;
+  margin: 0;
+  padding: 0;
+  padding-right:10px;
+  text-align:left;
+}
+
+input.onTheLeft{
+  margin: 0;
+  padding: 0;
+}
+
+label img{
+	padding-left: 210px;
+	padding-bottom: 5px;
+}
+
+input {
+	margin-left:20px;	
+  margin-right:20px;
+  border: 1px solid #999;	
+} 
+
+.text input {
+  height: 2em;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.category{
+  margin: 10%;
+  padding:20px;
+  padding-right:30px;
+  padding-left: 30px;
+}
+
+.capa label{
+	width: 300px;
+	text-align: left;
+}
+
+input:focus, textarea:focus {
+  /* Pour souligner légèrement les éléments actifs */
+  border-color: rgb(19, 98, 148);
+}
+
+textarea {
+  /* Pour aligner les champs texte multi‑ligne avec leur étiquette */
+  vertical-align: top;
+
+  /* Pour donner assez de place pour écrire du texte */
+  height: 5em;
+}
+
+
+.aufschlag div{
+	display: inline;
+	overflow:none;
+}
+
+.aufschlag label, .aufschlag input{
+	width: auto;
+  margin:0 ;
+	margin-right:20px;
+	padding:0;
+	text-align:left;
+}
+
+.aufschlag input[type="text"]{
+	width:20%;
+}
+
+
+.errorMessage{
+  color: red;
+  font-size: smaller;
+  margin-top:0;
+}
+
+.ng-valid[required], .ng-valid.required {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.inline {
+	display: -webkit-flex;
+	display:flex;
+	-webkit-flex-direction:wrap;
+	flex-wrap:wrap;
+	-webkit-align-items:center;
+	align-items:center;
+	justify-content: space-around;
+	text-align:center;
+
+}
+
+.inline.onLeft{
+  justify-content: flex-start;
+}
+
+.inline.centering{
+  justify-content: center;
+}
+
+.option{
+	width:30%;
+	border: 1px solid black;
+	border-radius: 0.5em;
+	padding-left: 5px ;
+	padding-right: 5px ;
+	padding-bottom:10px;
+	text-align:center;
+	margin-bottom:10px;
+}
+
+.higherWeight{
+  font-weight: 500;
+}
+
+
+.option input{
+	margin-left:0;
+}
+
+.option .param{
+	text-align:left;
+	margin-top:0px;
+
+}
+
+
+.button {
+  text-align:center;
+  margin-top:20px;
+}
+
+button{
+  background-color: rgb(19, 98, 148, 0.9);
+  border: 0;
+  color: white;
+  font-size: 100%;
+  line-height: 1.5;
+  padding: 0.25rem 0.5rem;
+  text-transform: none;	
+  font-family: inherit;
+  margin:10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+button.nomargin{
+  margin:0;
+}
+
+button:hover{
+  background-color: rgb(19, 98, 148);
+}
+
+
+.colorOther{
+  /*background-color: rgb(103,180,25);*/
+  background-color: white;
+  color: rgb(19, 98, 148);
+  border: 1pt solid rgb(19, 98, 148);
+}
+
+.colorOther:hover{
+  background-color: rgb(19, 98, 148);
+  color: white;
+}
+
+.borderBottom{
+  border-bottom: 1px solid black;
+} 

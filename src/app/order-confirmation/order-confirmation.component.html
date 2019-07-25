@@ -1,0 +1,19 @@
+<h1>Bestätigungsseite </h1>
+
+<div *ngIf="order_id else default" class = "center frame">
+
+<p> Auftrag {{ order_id }} wird produziert.
+</p>
+
+<button class = "category" type="button" (click)="goToHome()"> Startseite </button>
+
+<button class = "category" type="button" (click)="goToOrderStat()"> Auftrag verfolgen </button>
+
+
+</div>
+
+<ng-template #default> 
+  <div class = "center frame noborder">
+  <button class = "category" type="button" (click)="goToHome()"> Startseite </button>
+  </div>
+</ng-template>

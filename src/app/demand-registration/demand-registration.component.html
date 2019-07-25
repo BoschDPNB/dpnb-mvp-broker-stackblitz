@@ -1,0 +1,134 @@
+<h1>Angebote einholen</h1>
+
+<form [formGroup]="demandRegistrationForm" (ngSubmit) = "onSubmit(demandRegistrationForm.value)" >
+	<div class="text">
+
+	<h3>Stammdaten: </h3>
+    <div>
+      <label for="nameKunde">Name des Unternehmens: </label>
+		  <input type="text" id="nameKunde" formControlName="company_name" required> 
+      <p *ngIf="company_name.errors?.required && (company_name.dirty || company_name.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe eines Unternehmensname ist erforderlich 
+      </p>
+    </div>
+	<h4> Lieferadresse: </h4>
+    <div formGroupName="delivery_address">
+    <div>
+        <label for="strKunde">Straße:</label>
+        <input type="text" id="strKunde" formControlName="street" required>
+        <p *ngIf="street.errors?.required && (street.dirty || street.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe einer Straße ist erforderlich 
+        </p> 
+    </div>
+	    <div>
+        <label for="nr">Hausnummer:</label>
+        <input type="number" id="nrKunde" formControlName="number" required>
+        <p *ngIf="nb.errors?.required && (nb.dirty || nb.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe einer Hausnummer ist erforderlich 
+        </p>  
+    </div>
+    <div>
+        <label for="plzKunde">PLZ:</label>
+        <input type="number" id="plzKunde" formControlName="postal_code" required> 
+        <p *ngIf="postal_code.errors?.required && (postal_code.dirty || postal_code.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe einer PLZ ist erforderlich 
+        </p> 
+    </div>	
+    <div>
+        <label for="ortKunde">Ort:</label>
+        <input type="text" id="ortKunde" formControlName="city" required> 
+        <p *ngIf="city.errors?.required && (city.dirty || city.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe einer Ort ist erforderlich 
+        </p>
+    </div>
+	  </div>
+  </div>
+	
+	<h3> Produktauswahl: </h3>
+		<label for="produkt1">Einfarbiges Ei<img src = "{{ein}}" width=40px/> </label> 
+		<input type="radio" id="produkt1" formControlName="product_id"  value="einfarbig" required>
+		<br>
+	
+		<label for="produkt2">Zweifarbiges Ei<img src = "{{zwei}}" width=40px/></label>	
+		<input type="radio" id="produkt2" formControlName="product_id" value="zweifarbig" required>
+		<br>
+
+		<label for="produkt3">Einfarbiger Hut<img src = "{{stutz}}" width=40px/></label>	
+		<input type="radio" id="produkt3" formControlName="product_id" value="stutzmaterial" required>
+		<br>
+
+    <label for="produkt4">Zweifarbiges Ei und Hut<img src = "{{zweistutz}}" width=40px/></label>	
+		<input type="radio" id="produkt4" formControlName="product_id" value="ein-zweifarbig" required>
+		<br>
+    <p *ngIf="product_id.errors?.required" class="errorMessage" style="margin-block-end:0">
+      Das Wahl eines Produkts ist erforderlich 
+    </p>
+	
+		<label for="strKunde">Stückzahl:</label>
+        <input type="number" id="stuckzahl" formControlName="amount" required> 
+        <p *ngIf="amount.errors?.required && (amount.dirty || amount.touched)" class="errorMessage" style="margin-block-end:0">
+          Die Eingabe einer Stückzahl ist erforderlich 
+        </p>
+		
+	<br/><br/>
+  	<h3>Optionale Angaben:</h3> 
+		<h4> Lieferungsdaten: </h4>
+	
+		<label for="datum">Zieldatum:</label>
+        <input type="date" id="datum" formControlName="delivery_date"> 
+		<br>
+		
+		<label for="preis">Preisgrenze (€/Stück):</label>
+        <input type="number" id="preis" formControlName="max_price"> 
+		<br/>
+		
+		<h4> Minimale Lieferantenbewertung: </h4>
+		<label for="bewertung1">☆ </label>
+        <input type="radio" id="bewertung1" formControlName="min_rating" value="1"> 
+		<br>
+		
+		<label for="bewertung2">☆ ☆ </label>
+        <input type="radio" id="bewertung2" formControlName="min_rating" value="2"> 
+		<br>
+		
+		<label for="bewertung3">☆ ☆ ☆ </label>
+        <input type="radio" id="bewertung3" formControlName="min_rating" value="3"> 
+		<br>
+		
+		<label for="bewertung4">☆ ☆ ☆ ☆ </label>
+        <input type="radio" id="bewertung4" formControlName="min_rating" value="4"> 
+		<br>
+		
+		<label for="bewertung5">☆ ☆ ☆ ☆ ☆ </label>
+        <input type="radio" id="bewertung5" formControlName="min_rating" value="5"> 
+		<br>
+
+	<h4> Restriktionen an die Lieferanten: </h4>
+    <div formArrayName="required_qualifications"
+      *ngFor="let quali of demandRegistrationForm.controls.required_qualifications.controls; let i=index">
+      <label> {{ qualifications[i].quali }} </label>
+		  <input type="checkbox" [formControlName]="i" > 
+      <br/>		
+    </div>
+
+	<h4> Weitere Anforderungen: </h4>
+    <div formArrayName="required_abilities"
+      *ngFor="let quali of demandRegistrationForm.controls.required_abilities.controls; let i=index">
+      <label> {{ requiredAbilities[i].item }} </label>
+		  <input type="checkbox" [formControlName]="i" > 
+      <br/>		
+    </div>
+
+
+	<h4> Zu trackende Qualitätsmetriken: </h4>
+      <div formArrayName="quality_measurements"
+      *ngFor="let quali of demandRegistrationForm.controls.quality_measurements.controls; let i=index">
+      <label> {{ qualityMetrics[i].item }} </label>
+		  <input type="checkbox" [formControlName]="i" > 
+      <br/>		
+    </div>
+	
+	<div class="button">
+        <button type="submit" [disabled]="demandRegistrationForm.invalid">Absenden</button>
+    </div>
+</form>

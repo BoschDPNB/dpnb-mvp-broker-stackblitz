@@ -1,0 +1,37 @@
+<h1>Auftrag verfolgen </h1>
+
+<div *ngIf="order_id else default">
+
+<p class = "center"> Auftrags-ID : {{ order_id }} 
+</p>
+<div class ="frame">
+  <h3>Qualitätsmetriken:</h3>
+  <div *ngIf="temperature">
+    <span class="higherWeight"> Temperatur: </span> {{ temperature }} Grad
+  </div>
+
+  <div *ngIf="dispersion">
+    <span class="higherWeight"> Maximale Maßabweichung: </span> {{ dispersion }} cm
+  </div>
+
+  <div *ngIf="!dispersion && !temperature">
+    Für diesen Auftrag sind keine Qualitätsmetriken vorhanden.
+  </div>
+
+  <h3>Einen anderen Auftrag tracken</h3>
+  Auftrags-ID:
+  <input type="text" #idInput> 
+  <button (click)="updateId(idInput)"> Absenden </button>
+
+</div>
+
+
+</div>
+
+<ng-template #default> 
+  <div class ="frame padd"> 
+    Auftrags-ID:
+    <input type="text" #idInput2 > 
+    <button (click)="updateId(idInput2)"> Absenden </button>
+  </div>
+</ng-template>

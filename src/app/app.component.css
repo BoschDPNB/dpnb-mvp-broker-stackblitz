@@ -1,0 +1,48 @@
+p {
+  font-family: Lato;
+}
+
+.active{
+  font-weight: 500;
+}
+
+.nav {
+	display: -webkit-flex;
+	display:flex;
+	-webkit-flex-direction:wrap;
+	flex-wrap:wrap;
+	-webkit-align-items:center;
+	align-items:center;
+	justify-content: center;
+	text-align:center;
+
+}
+
+ul{
+  list-style-type: none;
+  margin: 10px;
+  padding-inline-start: 0px;
+  clear: left;
+}
+
+ul li a{
+  background-color: none;
+  border: 1pt solid rgba(19, 98, 148);
+  color:  rgb(19, 98, 148);
+  font-size: 100%;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+  text-transform: none;	
+  font-family: inherit;
+  margin:10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+ul li a:hover{
+  background-color: rgb(19, 98, 148, 0.9);
+  color:  white;
+  font-style: none;
+}

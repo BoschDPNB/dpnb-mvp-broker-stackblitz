@@ -1,0 +1,138 @@
+<h1>Registrierung als Anbieter </h1>
+
+<div class="center">
+<button type="button" (click)="goToAuth()"> Ich habe bereits ein Konto </button>
+</div>
+
+<form [formGroup]="registrationForm" (ngSubmit) = "onSubmit(registrationForm.value)" > 
+	<div class="text">
+	<h3>Anmeldedaten: </h3>
+    <div>
+        <label for="user_name">Benutzername:</label>
+        <input type="text" id="user_name" formControlName="username" required> 
+        <p *ngIf="username.errors?.required && (username.dirty || username.touched)" class="errorMessage">
+          Benutzername ist erforderlich 
+        </p>
+        <p *ngIf="username.errors?.unvalid && (username.dirty || username.touched)" class="errorMessage">
+          Dieser Benutzername ist schon benutzt. Bitte wählen Sie einen neuen Benutzername aus
+        </p>
+    </div>
+    <div>
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" formControlName="password" required>
+        <p *ngIf="password.errors?.required && (password.dirty || password.touched)" class="errorMessage">
+          Passwort ist erforderlich 
+        </p>
+    </div>
+	<h3>Stammdaten: </h3>
+    <div>
+        <label for="name">Name des Unternehmens:</label>
+        <input type="text" id="name" formControlName="company_name" required> 
+        <p *ngIf="company_name.errors?.required && (company_name.dirty || company_name.touched)" class="errorMessage">
+            Name des Unternehmens ist erforderlich 
+        </p>
+    </div>
+    <div formGroupName="company_address">
+    <div>
+        <label for="str">Straße:</label>
+        <input type="text" id="str" formControlName="street" required>
+        <p *ngIf="street.errors?.required && (street.dirty || street.touched)" class="errorMessage">
+          Die Eingabe einer Straße ist erforderlich 
+        </p>
+    </div>
+	  <div>
+        <label for="nr">Hausnummer:</label>
+        <input type="number" id="nr" formControlName="number" required> 
+        <p *ngIf="nb.errors?.required && (nb.dirty || nb.touched)" class="errorMessage"> 
+          Die Eingabe einer Hausnummer ist erforderlich
+        </p>
+    </div>
+    <div>
+        <label for="plz">PLZ:</label>
+        <input type="number" id="plz" formControlName="postal_code" required>
+        <p *ngIf="postal_code.errors?.required && (postal_code.dirty || postal_code.touched)" class="errorMessage">
+          Die Eingabe einer PLZ ist erforderlich 
+        </p>
+    </div>	
+    <div>
+        <label for="ort">Ort:</label>
+        <input type="text" id="ort" formControlName="city" required> 
+        <p *ngIf="city.errors?.required && (city.dirty || city.touched)" class="errorMessage">
+          Die Eingabe einer Stadt ist erforderlich 
+        </p>
+    </div>
+	</div>
+</div>
+	
+
+	<!--
+	FOR THE CAPABILITIES	
+	-->
+
+	<h3> Qualifikation: </h3>
+		<div formArrayName="qualifications"
+      *ngFor="let quali of registrationForm.controls.qualifications.controls; let i=index">
+      <label> {{ qualifications_arr[i].quali }} </label>
+		  <input type="checkbox" [formControlName]="i" > 
+      <br/>		
+    </div>
+
+
+
+	<h3> Rolle: </h3>
+		<label for="produktion">Produktionsanbieter</label>
+	<input type="radio" formControlName="role" id="rolleProd" value="production">
+
+		<br>
+	
+		<label for="transport">Transportdienstleister</label>	
+	<input type="radio" formControlName="role" id="rolleTrans" value="transport">
+      
+		<br>
+    <div *ngIf="role.errors?.required" class="errorMessage">
+          <p >Sie müssen eine Rolle wählen</p>
+    </div>
+
+	
+	<div class = "capa" *ngIf="registrationForm.controls.role.value=='production'  else transport">
+	<h3> Für Produktionsanbieter: </h3>
+	  <h4> 3D-Drucker: </h4>
+    <div formArrayName="machines"
+      *ngFor="let type of registrationForm.controls.machines.controls; let i=index">
+      <label> {{ machines_arr[i].type }} </label>
+      <input type="number" [formControlName]="i" >
+      <br/>		
+    </div>
+
+    <h4> Montage: </h4>
+    <label> {{ capability_arr[0].item }} </label>
+		<input type="checkbox" formControlName="abilities" > 
+    <br/>		
+  </div>
+
+  <ng-template #transport>
+    <div *ngIf="registrationForm.controls.role.value=='transport'">
+	<h4> Fahrzeugstype: </h4>
+      	<div formArrayName="trucks"
+        	*ngFor="let type of registrationForm.controls.trucks.controls; let i=index">
+          <label> {{ truck_arr[i].type }} </label>
+          <input type="number" [formControlName]="i" > 
+          <br/>		
+      	</div>
+      	<h4> Fähigkeiten: </h4>
+        <div formArrayName="abilitiesTransport" *ngFor="let abilitiy of registrationForm.controls.abilitiesTransport.controls; let i=index">
+        <label> {{ abilities_t[i].ability }} </label>
+		    <input type="checkbox" [formControlName]="i" >
+      	<br/>	
+    	</div>	
+    </div>
+  </ng-template>
+
+	
+	
+	<div class="button">
+    <button type="submit" [disabled]="registrationForm.invalid">Absenden</button>
+  </div>
+</form>
+
+

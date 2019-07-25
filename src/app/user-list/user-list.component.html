@@ -1,0 +1,30 @@
+<!--<button (click)="onFetch()">Get all users</button> <br/>-->
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let user of users">
+    <h3>{{ user.username }} de {{ user.company_name }}</h3>
+    <p>passwort: {{ user.password }}. Id: {{ user.id }}</p>
+    <p>Dieses Unternehmen befindet sich in {{ user.company_address.nb }} {{ user.company_address.street }}, {{ user.company_address.postal_code }} {{ user.company_address.city }}</p>
+
+    <p *ngIf="user.qualifications && user.qualifications.length > 0">
+      Dieses Unternehmen hat folgende Qualifikationen:
+      <span *ngFor="let qualification of user.qualifications">{{ qualification }} , </span>
+    </p>
+
+    <p>
+      Dieses Unternehmen ist als {{ user.role }}-Lieferant registriert.
+    </p>
+
+    <p *ngIf="user.machines && user.machines.length > 0">
+      Dieses Unternehmen besitzt die folgenden Maschinen:
+      <span *ngFor="let machine of user.machines">{{ machine }} - </span>
+    </p>
+
+    <p *ngIf="user.capability && user.capability.length > 0">
+      Dieses Unternehmen hat die folgenden Fähigkeiten vorhanden:
+      <span *ngFor="let capa of user.capability">{{ capa }} - </span>
+    </p>
+
+  </li>
+</ul>
+

@@ -1,0 +1,68 @@
+<h1>Kapazitäts- und Preisverwaltung</h1>
+
+
+<div *ngIf="loggedUser else default" class="frame">  
+
+  <div *ngIf="loggedUser.role=='production'" class="borderBottom">
+    <h3> Materialkosten</h3>
+    <label class="onTheLeft"> Preis pro kg (in €):</label>
+    <input type="number" class="onTheLeft" id="materialKost" #materialKost>
+    <button type="button" (click)="onSubmitMaterialPrice(materialKost)"> Materialkosten aktualisieren </button> <br/><br/>
+  </div>
+  
+  <div *ngFor="let item of categories; let k=index" class="borderBottom">
+    <h3>{{ categories[k] }} </h3>
+
+    <div class="inline onLeft">
+      <label for="preis" class="onTheLeft">Standardpreis <span *ngIf="loggedUser.role=='production' else transportPrice"> (€/Minute) </span> <ng-template #transportPrice> (€/km) </ng-template>: </label>
+      <input type="number" class="onTheLeft" id="preis" #preis > 
+      <button type="button" (click)="onSubmitPrice(preis, k)"> Standardpreis aktualisieren </button>
+      <div class="confirmation" id="k">Die Daten wurden gespeichert </div>
+    </div>
+
+    <div class="inline onLeft"  *ngIf="loggedUser.role=='transport'" >
+      <label for="minpreis" class="onTheLeft"> Minimalpreis (€): </label>
+      <input type="number" class="onTheLeft" id="minpreis" #minpreis > 
+      <button type="button" (click)="onSubmitMinPrice(minpreis)"> Minimalpreis aktualisieren </button>
+    </div>
+
+  <form [formGroup]="priceManagementForm" (ngSubmit) = "onSubmitDiscounts(priceManagementForm.value, k)" class="noborder">
+    <div formArrayName="discounts">
+      <h4> Sonderperioden </h4>
+    
+      <div class="aufschlag" *ngFor="let adress of priceManagementForm.controls.discounts.controls;   let i = index"      [formGroupName]="i">
+        <div>
+          <label class="date" for="von1">Am:</label>
+          <input type="date" id="von1" formControlName="date"> 
+        </div>
+
+        <div>
+          <label for="aufschlag1">Aufschlag (in %):</label>
+          <input type="number" id="aufschlag1" formControlName="percentage"> 
+        </div>
+    
+        <div>
+          <label for="avail">Nicht verfügbar </label>
+          <input type="checkbox" id="avail" formControlName="availability"> 
+        </div>
+
+        <br/><br/>
+      </div>
+    </div>
+    
+
+    <div class="inline onLeft">
+      <button type="button" class="nomargin" (click)="addDiscounts(k)"> Weitere Zeile </button>
+      <button type="submit">Sonderperioden aktualisieren</button>
+    </div>
+  </form>
+  </div>
+  <div>
+    <br/> <br/>
+    <button type="button" class="nomargin colorOther" (click)="goToUserStats()"> Zurück zu Lieferanteninformationen </button>
+  </div>
+</div>
+
+<ng-template #default> 
+  Welcome ! You first need to register...
+</ng-template>

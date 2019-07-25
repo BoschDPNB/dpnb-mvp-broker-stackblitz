@@ -1,0 +1,35 @@
+<h1>Anmeldung</h1>
+
+<div *ngIf="!loggedUser else default">
+
+<form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <div class="inline onLeft">
+        <label for="username">Benutzername:</label>
+        <input type="text" id="username" formControlName="username" required>
+        <p *ngIf="username.errors?.required && (username.dirty || username.touched)" class="errorMessage" style="margin-block-end:0">
+          Benutzername ist erforderlich 
+        </p> <br/><br/>
+      </div>
+
+      <div class="inline onLeft">
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" formControlName="password" required>
+        <p *ngIf="password.errors?.required && (password.dirty || password.touched)" class="errorMessage" style="margin-block-end:0">
+          Passwort ist erforderlich 
+        </p>
+      </div>
+
+      <div class="button">
+        <button type="submit" [disabled]="authForm.invalid">Anmelden</button>
+      </div>
+</form>
+<div class="center marginTop">
+<button type="button" (click)="goToRegistration()"> Neuen Anbieter? </button>
+</div></div>
+
+<ng-template #default> <!-- is linked to the *ngIf of the first div. is shown if a user is already logged in -->
+  <div class="center">Sie sind bereits angemeldet. <br/><br/>
+    <button type="button" (click)="goToStats()"> Meine Statistiken </button>
+
+  </div>
+</ng-template>

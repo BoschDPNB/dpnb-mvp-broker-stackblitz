@@ -1,0 +1,25 @@
+<h1>Auswahl einer Prozesskette</h1>
+
+<p *ngIf="order_id" class = "center"> Die folgenden Prozessketten sind für Auftrag {{ order_id }} verfügbar: </p>
+
+<form [formGroup]="choiceSupplierForm" (ngSubmit) = "onSubmit(choiceSupplierForm.value)" >
+
+	<div class="inline" >
+	<div class="option" *ngFor="let proposal of suppliersProposal; let i = index">
+
+		<h4> Option {{ i + 1 }} </h4>
+		<div class="param"> 
+      <span class="higherWeight"> Gesamtpreis (in €): </span> {{ proposal.price }} <br/>
+			<span class="higherWeight"> Lieferdatum: </span>  {{ proposal.date | date }} <br/>
+			<span class="higherWeight"> Bewertung: </span>  {{ proposal.evaluation }} <br/><br/>
+		</div>
+		<input type="radio" [value]= "i" formControlName="choice" required>
+	</div>
+	</div>
+
+	
+	<div class="button">
+    <button type="submit" [disabled]="choiceSupplierForm.invalid">Absenden</button>
+  </div>
+
+</form>
