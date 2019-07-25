@@ -99,7 +99,7 @@
 	  <h4> 3D-Drucker: </h4>
     <div formArrayName="machines"
       *ngFor="let type of registrationForm.controls.machines.controls; let i=index">
-      <label> {{ machines_arr[i].type }} </label>
+      <label> Anzahl an {{ machines_arr[i].type }} </label>
       <input type="number" [formControlName]="i" >
       <br/>		
     </div>
@@ -111,11 +111,12 @@
   </div>
 
   <ng-template #transport>
-    <div *ngIf="registrationForm.controls.role.value=='transport'">
+    <div class = "capa" *ngIf="registrationForm.controls.role.value=='transport'">
+  <h3> Für Transportdienstleister: </h3>
 	<h4> Fahrzeugstype: </h4>
       	<div formArrayName="trucks"
         	*ngFor="let type of registrationForm.controls.trucks.controls; let i=index">
-          <label> {{ truck_arr[i].type }} </label>
+          <label> Anzahl an {{ truck_arr[i].type }} </label>
           <input type="number" [formControlName]="i" > 
           <br/>		
       	</div>

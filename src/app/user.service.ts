@@ -31,7 +31,7 @@ export class UserService {
   saveOneUserToServer(user: User) {
     let id = this.users.length; /*TO BE ERASED?????*/ 
     this.httpClient
-      .post<User>('https://dpnb-broker.firebaseio.com/users.json', user)
+      .post<User>('https://dpnb-mvp.firebaseio.com//users.json', user)
       .subscribe(
         (val) => {
           user.id = val["name"];
@@ -48,7 +48,7 @@ export class UserService {
   getUsersFromServer(){
     this.users.splice(0, this.users.length);
     this.httpClient
-      .get('https://dpnb-broker.firebaseio.com/users.json')
+      .get('https://dpnb-mvp.firebaseio.com//users.json')
       .subscribe(
         (response: User[]) => {
           for(let obj in response){

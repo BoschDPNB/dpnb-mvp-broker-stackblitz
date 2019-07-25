@@ -34,7 +34,7 @@ export class AuthService {
     let user = new User();
     const params = new HttpParams().set('orderBy', '"username"').set('equalTo','"'+username+'"');
     this.httpClient
-      .get('https://dpnb-broker.firebaseio.com/users.json', {params})
+      .get('https://dpnb-mvp.firebaseio.com//users.json', {params})
       .subscribe(
         data => {
           for(let a in data){passwordServer = data[a]['password']; user = data[a]; user['id'] = a};
@@ -80,7 +80,7 @@ export class AuthService {
     let userId = this.actualUser.id;
     const params = new HttpParams().set('orderBy', '"$key"').set('equalTo','"'+userId+'"');
     this.httpClient
-      .get('https://dpnb-broker.firebaseio.com/capacities.json', {params})
+      .get('https://dpnb-mvp.firebaseio.com/capacities.json', {params})
       .subscribe(
         (response: Capacity[]) => {
           let discounts: Discount[]=[];

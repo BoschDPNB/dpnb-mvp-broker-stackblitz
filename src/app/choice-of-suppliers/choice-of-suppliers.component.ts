@@ -68,7 +68,7 @@ export class ChoiceOfSuppliersComponent implements OnInit {
   const accept = {offer: choiceSupplier["choice"]};
   
   this.httpClient
-      .put<Request>('https://dpnb-broker.firebaseio.com/offers/'+this.order_id+'/accept.json', accept)
+      .put<Request>('https://dpnb-mvp.firebaseio.com//offers/'+this.order_id+'/accept.json', accept)
       .subscribe(
         (val) => {
           console.log("Data submitted: ", accept, " -- ", val);

@@ -120,7 +120,7 @@ export class DemandRegistrationComponent implements OnInit {
       this.convertMeasurements(demandData)
     );
     this.httpClient
-      .post<Request>('https://dpnb-broker.firebaseio.com/offers/requests.json', newDemand)
+      .post<Request>('https://dpnb-mvp.firebaseio.com//offers/requests.json', newDemand)
       .subscribe(
         (val) => {
           console.log("Data submitted: ", newDemand);
@@ -153,7 +153,7 @@ export class DemandRegistrationComponent implements OnInit {
       () => {
         if(metrics){
               this.httpClient
-      .put('https://dpnb-broker.firebaseio.com/orders/'+this.orderId+'/status.json', metrics)
+      .put('https://dpnb-mvp.firebaseio.com//orders/'+this.orderId+'/status.json', metrics)
       .subscribe(
         (val) => {
           console.log("Metrics submitted: ", metrics);

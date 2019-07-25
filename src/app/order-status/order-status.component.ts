@@ -36,7 +36,7 @@ export class OrderStatusComponent implements OnInit {
 
       const params = new HttpParams().set('orderBy', '"$key"').set('equalTo','"'+this.order_id+'"');
       this.httpClient
-        .get('https://dpnb-broker.firebaseio.com/orders.json', {params})
+        .get('https://dpnb-mvp.firebaseio.com//orders.json', {params})
         .subscribe(
           (response) => {
             console.log(response[this.order_id]);

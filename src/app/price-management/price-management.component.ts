@@ -21,6 +21,21 @@ export class PriceManagementComponent implements OnInit {
   public priceManagementForm: FormGroup;
   categories: String[]; //either machines or trucks
 
+  machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
+  truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];
+
+  machine_eq={
+    SMALL_SIMPLEX: "Kleiner 3D-Drucker, Einfarbig",
+    SMALL_DUPLEX: "Kleiner 3D-Drucker, Zweifarbig",
+    SMALL_SUPPORT: "Kleiner 3D-Drucker, Mit Stützmaterial",
+    LARGE_SIMPLEX: "Großer 3D-Drucker, Einfarbig",
+    LARGE_DUPLEX: "Großer 3D-Drucker, Zweifarbig",
+    LARGE_SUPPORT: "Großer 3D-Drucker, Mit Stützmaterial",
+    PKW_CADDY:"PKW Caddy",
+    _7T_FAHRZEUG:"LKW 7,5to",
+    _40T_FAHRZEUG:"LKW 40to",
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -44,12 +59,24 @@ export class PriceManagementComponent implements OnInit {
       this.userSubscription = this.authService.userSubject.subscribe(
         (user: User) => {
           this.loggedUser = user;
-          if(user.role=="production"){
-            this.categories=user.machines;
+          if(user.role=="production" && user.machines){
+            this.categories=[];
+            for(let item in this.machine_list){
+              if(user.machines[this.machine_list[item]]>0){
+                this.categories.push(this.machine_list[item])
+              }
+              
+            };
           }
-          else{
-            this.categories=user.trucks;
-          }
+          else{ if(user.trucks){
+            this.categories=[];
+            for(let item in this.truck_list){
+              if(user.trucks[this.truck_list[item]]>0){
+                this.categories.push(this.truck_list[item])
+              }
+              
+            };
+          }}
         }
       );
       this.authService.emitUserSubject();
@@ -76,7 +103,7 @@ export class PriceManagementComponent implements OnInit {
     const matPrice=materialKost.value;
     const id = this.loggedUser['id'];
     this.httpClient
-      .put('https://dpnb-broker.firebaseio.com/capacities/'+id+'/material_cost.json', matPrice)
+      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/material_cost.json', matPrice)
       .subscribe(
         (val) => {
           console.warn('Your data have been submitted', matPrice);
@@ -97,7 +124,7 @@ export class PriceManagementComponent implements OnInit {
     };
     const id = this.loggedUser['id'];
     this.httpClient
-      .post('https://dpnb-broker.firebaseio.com/capacities/'+id+'/'+this.categories[k]+'.json', newDiscounts)
+      .post('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'.json', newDiscounts)
       .subscribe(
         (val) => {
           console.warn('Your data have been submitted', newDiscounts);
@@ -124,7 +151,7 @@ export class PriceManagementComponent implements OnInit {
     const price=preis.value;
     const id = this.loggedUser['id'];
     this.httpClient
-      .put('https://dpnb-broker.firebaseio.com/capacities/'+id+'/'+this.categories[k]+'/default_price.json', price)
+      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'/default_price.json', price)
       .subscribe(
         (val) => {
           console.warn('Your data have been submitted', price);
@@ -148,7 +175,7 @@ export class PriceManagementComponent implements OnInit {
     const minprice= minpreis.value;
     const id = this.loggedUser['id'];
     this.httpClient
-      .put('https://dpnb-broker.firebaseio.com/capacities/'+id+'/'+this.categories[k]+'/minimumprice.json', minprice)
+      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'/minimumprice.json', minprice)
       .subscribe(
         (val) => {
           console.warn('Your data have been submitted', minprice);

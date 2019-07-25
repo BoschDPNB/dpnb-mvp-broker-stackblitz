@@ -1,5 +1,5 @@
 export class Machines {
-
+  
   constructor(
     public SMALL_SIMPLEX: number,
     public SMALL_DUPLEX: number,

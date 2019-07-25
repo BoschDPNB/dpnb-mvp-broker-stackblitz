@@ -13,7 +13,6 @@ import { Capacity } from '../models/capacity.model';
 })
 export class UserStatisticsComponent implements OnInit {
 
-//  @Input() supplierId : string;
   loggedUser: User;
   userSubscription: Subscription;
   capa_obj: {};
@@ -37,45 +36,59 @@ export class UserStatisticsComponent implements OnInit {
     _7T_FAHRZEUG:"LKW 7,5to",
     _40T_FAHRZEUG:"LKW 40to",
   }
+  machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
+  truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];
   
   ngOnInit() {
     if(this.authService.getActualUser()){
-      //console.log(this.authService.getActualUser());
       this.userSubscription = this.authService.userSubject.subscribe(
         (user: User) => {
           this.loggedUser = user;
-          if(user.role=="production"){
-            this.categories=user.machines;
+          if(user.role=="production" && user.machines){
+            this.categories=[];
+            for(let item in this.machine_list){
+              if(user.machines[this.machine_list[item]]>0){
+                this.categories.push(this.machine_list[item])
+              }
+              
+            };
           }
-          else{
-            this.categories=user.trucks;
-          }
+          else{ if(user.trucks){
+            this.categories=[];
+            for(let item in this.truck_list){
+              if(user.trucks[this.truck_list[item]]>0){
+                this.categories.push(this.truck_list[item])
+              }
+              
+            };
+          }}
         }
       );
       this.authService.emitUserSubject();
     };
+    
     let k=0;
     while (this.categories[k]){
-      console.log("init " , this.categories[k] );
-    this.authService.getUserCapacities(this.categories[k]);
-    this.capa_obj={};
-    if(this.authService.getActualUserCapacities()){
-      this.capaSubscription = this.authService.capacitiesSubject.subscribe(
-        (capa: Capacity[]) => {
-          this.capacities = capa;
-          this.capa_obj[this.categories[k]]=capa;
-      });
-      
-      this.authService.emitCapaSubject();
-    };
-    console.log(name, ' capa: ',this.capacities);
-    k++;
+      this.authService.getUserCapacities(this.categories[k]);
+      this.capa_obj={};
+      if(this.authService.getActualUserCapacities()){
+        this.capaSubscription = this.authService.capacitiesSubject.subscribe(
+          (capa: Capacity[]) => {
+            this.capacities = capa;
+            this.capa_obj[this.categories[k]]=capa;
+        });
+        
+        this.authService.emitCapaSubject();
+      };
+      console.log(name, ' capa: ',this.capacities);
+      k++;
     }
-    
   }
 
   ngOnDestroy(){
-    this.capacities.splice(0,this.capacities.length);
+    if(this.capacities){
+      this.capacities.splice(0,this.capacities.length);
+    }
   }
 
   goToPriceManagement(){
@@ -84,7 +97,6 @@ export class UserStatisticsComponent implements OnInit {
 
   onSignOut() {
     this.authService.signOut();
-  /*  location.reload();*/
   
   }
 
