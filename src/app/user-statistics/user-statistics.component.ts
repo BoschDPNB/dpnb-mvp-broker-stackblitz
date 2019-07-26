@@ -74,6 +74,7 @@ export class UserStatisticsComponent implements OnInit {
       if(this.authService.getActualUserCapacities()){
         this.capaSubscription = this.authService.capacitiesSubject.subscribe(
           (capa: Capacity[]) => {
+            console.log(capa);
             this.capacities = capa;
             this.capa_obj[this.categories[k]]=capa;
         });

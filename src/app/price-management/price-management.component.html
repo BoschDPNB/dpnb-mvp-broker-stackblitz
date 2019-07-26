@@ -23,7 +23,7 @@
     <div class="inline onLeft"  *ngIf="loggedUser.role=='transport'" >
       <label for="minpreis" class="onTheLeft"> Minimalpreis (€): </label>
       <input type="number" class="onTheLeft" id="minpreis" #minpreis > 
-      <button type="button" (click)="onSubmitMinPrice(minpreis)"> Minimalpreis aktualisieren </button>
+      <button type="button" (click)="onSubmitMinPrice(minpreis, k)"> Minimalpreis aktualisieren </button>
     </div>
 
   <form [formGroup]="priceManagementForm" (ngSubmit) = "onSubmitDiscounts(priceManagementForm.value, k)" class="noborder">

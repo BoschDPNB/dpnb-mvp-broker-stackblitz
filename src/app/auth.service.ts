@@ -96,7 +96,7 @@ export class AuthService {
           }
           this.actualUserCapacities.push({
             default_price: response[userId][name]["default_price"],
-            min_price: response[userId]["minimumprice"],
+            min_price: response[userId][name]["min_price"],
             discounts: discounts,
           })
             

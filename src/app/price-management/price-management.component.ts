@@ -164,18 +164,14 @@ export class PriceManagementComponent implements OnInit {
         },
       ); 
     document.getElementsByClassName("onLeft").style.display="inline";
-    /*setTimeout(
-      ()=>{
-        this.router.navigate(['/user-stats']);
-      }, 2000
-    )*/
+
   }
 
-  onSubmitMinPrice(minpreis){
+  onSubmitMinPrice(minpreis, k){
     const minprice= minpreis.value;
     const id = this.loggedUser['id'];
     this.httpClient
-      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'/minimumprice.json', minprice)
+      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'/min_price.json', minprice)
       .subscribe(
         (val) => {
           console.warn('Your data have been submitted', minprice);
@@ -187,11 +183,7 @@ export class PriceManagementComponent implements OnInit {
           console.log('Data saved');
         },
       ); 
-    setTimeout(
-      ()=>{
-        this.router.navigate(['/user-stats']);
-      }, 2000
-    )
+
 
   }
 
