@@ -124,7 +124,7 @@
       <div formArrayName="quality_measurements"
       *ngFor="let quali of demandRegistrationForm.controls.quality_measurements.controls; let i=index">
       <label> {{ qualityMetrics[i].item }} </label>
-		  <input type="checkbox" [formControlName]="i" > 
+		  <input type="checkbox"[formControlName]="i" > 
       <br/>		
     </div>
 	

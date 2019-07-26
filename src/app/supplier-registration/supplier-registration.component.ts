@@ -57,12 +57,12 @@ export class SupplierRegistrationComponent implements OnInit {
   
   capability_arr = [
     { id: 'ASSEMBLY_ASSISTANT', item: 'Montageassistent vorhanden'},
-    { id: 'TRANSPORT_COOLING', item: 'Transportkühlung vorhanden'},
   ];
 
   abilities_t = [
     { id: 'PALETTENANSCHLAGLEISTE', ability: 'Palettenanschlagleiste vorhanden'},
     { id: 'HEBEBUHNE', ability: 'Hebebühne  vorhanden'},
+    { id: 'GEFAHRGUT', ability: 'Gefahrgutvorkehrungen  vorhanden'},
   ];
 
  
