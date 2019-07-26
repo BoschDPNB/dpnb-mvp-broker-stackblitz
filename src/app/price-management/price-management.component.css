@@ -1,4 +1,4 @@
-.confirmation{
+.confirmation, #confirmation{
   display: none;
   color:green;
 }

@@ -115,6 +115,14 @@ export class PriceManagementComponent implements OnInit {
           console.log('Data saved');
         },
       ); 
+    materialKost.value="";
+    window.scrollTo(0, 0);
+    document.getElementById("confirmation").style.display="inline";
+    setTimeout(
+      ()=>{
+        document.getElementById("confirmation").style.display="hidden";
+      }, 4000
+    )
   }
   
   onSubmitDiscounts(priceData, k){//k is the index of the machine / truck in categories
@@ -137,14 +145,14 @@ export class PriceManagementComponent implements OnInit {
         },
       );    
 
-    document.getElementById("k").style.display="inline";
     this.priceManagementForm.reset();
-    /*setTimeout(
+    window.scrollTo(0, 0);
+    document.getElementById("confirmation").style.display="inline";
+    setTimeout(
       ()=>{
-        this.priceManagementForm.reset();
-        this.router.navigate(['/user-stats']);
-      }, 2000
-    )*/
+        document.getElementById("confirmation").style.display="hidden";
+      }, 4000
+    )
   }
 
   onSubmitPrice(preis, k){ //k is the index of the machine / truck in categories
@@ -163,8 +171,15 @@ export class PriceManagementComponent implements OnInit {
           console.log('Data saved');
         },
       ); 
-    document.getElementsByClassName("onLeft").style.display="inline";
-
+    preis.value="";
+    window.scrollTo(0, 0);
+    document.getElementById("confirmation").style.display="inline";
+    setTimeout(
+      ()=>{
+        document.getElementById("confirmation").style.display="hidden";
+      }, 4000
+    )
+    
   }
 
   onSubmitMinPrice(minpreis, k){
@@ -183,8 +198,7 @@ export class PriceManagementComponent implements OnInit {
           console.log('Data saved');
         },
       ); 
-
-
+    document.getElementsByClassName("onLeft").style.display="inline";
   }
 
   getDiscounts(priceData){

@@ -42,7 +42,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
       { path: 'order-confirmation', component: OrderConfirmationComponent },
       { path: '', redirectTo: 'index', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent },
-    ]) 
+    ], {scrollPositionRestoration: 'enabled'}) 
   ],
   declarations: [ AppComponent, HelloComponent, SupplierRegistrationComponent, PriceManagementComponent, ChoiceOfSuppliersComponent, DemandRegistrationComponent, AuthComponent, UserListComponent, LoadingComponent, UserStatisticsComponent, HomepageComponent, PageNotFoundComponent, OrderStatusComponent, OrderConfirmationComponent ],
   bootstrap:    [ AppComponent ],

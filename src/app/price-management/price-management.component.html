@@ -2,6 +2,7 @@
 
 
 <div *ngIf="loggedUser else default" class="frame">  
+  <div id="confirmation" class="center">Die Daten wurden gespeichert  </div>
 
   <div *ngIf="loggedUser.role=='production'" class="borderBottom">
     <h3> Materialkosten</h3>
@@ -17,7 +18,6 @@
       <label for="preis" class="onTheLeft">Standardpreis <span *ngIf="loggedUser.role=='production' else transportPrice"> (€/Minute) </span> <ng-template #transportPrice> (€/km) </ng-template>: </label>
       <input type="number" class="onTheLeft" id="preis" #preis > 
       <button type="button" (click)="onSubmitPrice(preis, k)"> Standardpreis aktualisieren </button>
-      <div class="confirmation" id="k">Die Daten wurden gespeichert </div>
     </div>
 
     <div class="inline onLeft"  *ngIf="loggedUser.role=='transport'" >
@@ -51,7 +51,7 @@
     </div>
     
 
-    <div class="inline onLeft">
+    <div class="inline onLeft sonderperiod">
       <button type="button" class="nomargin" (click)="addDiscounts(k)"> Weitere Zeile </button>
       <button type="submit">Sonderperioden aktualisieren</button>
     </div>
