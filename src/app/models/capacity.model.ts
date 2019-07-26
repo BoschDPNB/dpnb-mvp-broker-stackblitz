@@ -1,11 +1,11 @@
 import { Discount } from './discount.model';
+import { CapacityMachine } from './capacityMachine.model';
 
 export class Capacity {
 
   constructor(
-    public default_price: number,
-    public discounts: Discount[],
-    public min_price : number,
+    public capacitiesMachine : CapacityMachine[],
+    public material_cost: number,
   ) {}
 
 

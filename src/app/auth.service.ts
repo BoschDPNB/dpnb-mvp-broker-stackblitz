@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Capacity } from './models/capacity.model';
+import { CapacityMachine } from './models/capacityMachine.model';
 import { Discount } from './models/discount.model';
 
 
@@ -12,9 +13,10 @@ export class AuthService {
 
   private isAuth = false;
   private actualUser : User;
-  private actualUserCapacities: Capacity[]=[];
+  private actualUserCapacities:Capacity={};
   userSubject = new Subject<User>();
-  capacitiesSubject = new Subject<Capacity[]>();
+  capacitiesSubject = new Subject<Capacity>();
+  matCostSubject = new Subject<number>();
 
   constructor(
     private httpClient: HttpClient,
@@ -27,6 +29,10 @@ export class AuthService {
   }
   emitCapaSubject(){
     this.capacitiesSubject.next(this.actualUserCapacities);
+  }
+
+  emitMatCost(){
+    this.matCostSubject.next(this.material_cost);
   }
 
   signIn({username, password}) {
@@ -61,9 +67,6 @@ export class AuthService {
     this.actualUser = undefined;
     this.isAuth= false;
     window.alert("Sie wurden abgemeldet.");
-    /*this.router.navigate(['/loading']);
-    setTimeout(
-      () => this.router.navigate(['/auth']), 500);*/
     this.router.navigate(['/auth']);  
   }
 
@@ -76,7 +79,7 @@ export class AuthService {
   }
 
 
-  getUserCapacities(name:String){
+  getUserCapacities(){
     let userId = this.actualUser.id;
     const params = new HttpParams().set('orderBy', '"$key"').set('equalTo','"'+userId+'"');
     this.httpClient
@@ -84,6 +87,10 @@ export class AuthService {
       .subscribe(
         (response: Capacity[]) => {
           let discounts: Discount[]=[];
+          let capacityMachineArray=[];
+          for(let name in response[userId]){
+            if(name!="material_cost"){
+              
           for (let elt in response[userId][name]){
             if(elt!="default_price" && elt!="minimumprice"){
               for(let di in response[userId][name][elt]["discounts"]){
@@ -94,12 +101,21 @@ export class AuthService {
               }
             }
           }
-          this.actualUserCapacities.push({
+          let newCapa:CapacityMachine={
             default_price: response[userId][name]["default_price"],
             min_price: response[userId][name]["min_price"],
             discounts: discounts,
-          })
-            
+            //material_cost: response[userId]["material_cost"],
+          }
+          console.log(newCapa);
+          capacityMachineArray.push(newCapa)
+          //this.actualUserCapacities[name]=(newCapa)
+          }
+          else{
+            this.actualUserCapacities["material_cost"]=response[userId]["material_cost"]
+          }
+          }
+          this.actualUserCapacities["capacitiesMachine"]=capacityMachineArray;
           this.emitCapaSubject;
         }
       )
@@ -109,5 +125,7 @@ export class AuthService {
     return(this.actualUserCapacities);
   }
   
+  material_cost: number;
+
 
 }
