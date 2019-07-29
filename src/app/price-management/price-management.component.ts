@@ -120,7 +120,7 @@ export class PriceManagementComponent implements OnInit {
     document.getElementById("confirmation").style.display="inline";
     setTimeout(
       ()=>{
-        document.getElementById("confirmation").style.display="hidden";
+        document.getElementById("confirmation").style.display="none";
       }, 4000
     )
   }
@@ -150,7 +150,7 @@ export class PriceManagementComponent implements OnInit {
     document.getElementById("confirmation").style.display="inline";
     setTimeout(
       ()=>{
-        document.getElementById("confirmation").style.display="hidden";
+        document.getElementById("confirmation").style.display="none";
       }, 4000
     )
   }
@@ -176,7 +176,7 @@ export class PriceManagementComponent implements OnInit {
     document.getElementById("confirmation").style.display="inline";
     setTimeout(
       ()=>{
-        document.getElementById("confirmation").style.display="hidden";
+        document.getElementById("confirmation").style.display="none";
       }, 4000
     )
     
@@ -198,7 +198,14 @@ export class PriceManagementComponent implements OnInit {
           console.log('Data saved');
         },
       ); 
-    document.getElementsByClassName("onLeft").style.display="inline";
+    minpreis.value="";
+    window.scrollTo(0, 0);
+    document.getElementById("confirmation").style.display="inline";
+    setTimeout(
+      ()=>{
+        document.getElementById("confirmation").style.display="none";
+      }, 4000
+    )
   }
 
   getDiscounts(priceData){

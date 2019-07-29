@@ -16,8 +16,7 @@ export class UserStatisticsComponent implements OnInit {
 
   loggedUser: User;
   userSubscription: Subscription;
-  capa_obj: {};
-  capacities: Capacity[];
+  capacities: Capacity;
   capaSubscription: Subscription;
   matCostSubscription: Subscription;
   material_cost: number;
@@ -71,40 +70,23 @@ export class UserStatisticsComponent implements OnInit {
     };
     
     let k=0;
-   // while (this.categories[k]){
-    //  this.authService.getUserCapacities(this.categories[k]);
     this.authService.getUserCapacities();
-      this.capa_obj={};
       if(this.authService.getActualUserCapacities()){
         this.capaSubscription = this.authService.capacitiesSubject.subscribe(
           (capa:Capacity) => {
-            //console.log(capa.length);
-            console.log("capa :", capa);
-            for(let i in capa){
-              for(let k in i){
-              
-              console.log("k.material_cost :", k.material_cost);
-              console.log(",capa[i][k].material_cost :",capa[i][k].material_cost)
-              //console.log(capa);
-              //console.log(capa[i].default_price)
-            }}
-            /*for(let i in capa){
-              console.log(i)
-            }*/
-            this.capacities = capa;
-            this.capa_obj[this.categories[k]]=capa;
+            this.capacities = capa;            
+            console.log("this.capacities", this.capacities)
             
         });
       
       this.authService.emitCapaSubject();};
-      k++;
-      //console.log(this.capa_obj)  ;
     
   }
 
   ngOnDestroy(){
     if(this.capacities){
-      this.capacities.splice(0,this.capacities.length);
+      this.capacities.capacitiesMachine=undefined;
+      this.capacities.material_cost= undefined;
     }
   }
 

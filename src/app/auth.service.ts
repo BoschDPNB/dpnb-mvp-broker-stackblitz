@@ -13,7 +13,7 @@ export class AuthService {
 
   private isAuth = false;
   private actualUser : User;
-  private actualUserCapacities:Capacity={};
+  private actualUserCapacities:Capacity=new Capacity();
   userSubject = new Subject<User>();
   capacitiesSubject = new Subject<Capacity>();
   matCostSubject = new Subject<number>();
@@ -86,9 +86,10 @@ export class AuthService {
       .get('https://dpnb-mvp.firebaseio.com/capacities.json', {params})
       .subscribe(
         (response: Capacity[]) => {
-          let discounts: Discount[]=[];
-          let capacityMachineArray=[];
+          let capacityMachineObj={};
           for(let name in response[userId]){
+            
+          let discounts: Discount[]=[];
             if(name!="material_cost"){
               
           for (let elt in response[userId][name]){
@@ -105,18 +106,18 @@ export class AuthService {
             default_price: response[userId][name]["default_price"],
             min_price: response[userId][name]["min_price"],
             discounts: discounts,
-            //material_cost: response[userId]["material_cost"],
           }
           console.log(newCapa);
-          capacityMachineArray.push(newCapa)
+          capacityMachineObj[name]=newCapa;
           //this.actualUserCapacities[name]=(newCapa)
           }
           else{
             this.actualUserCapacities["material_cost"]=response[userId]["material_cost"]
           }
           }
-          this.actualUserCapacities["capacitiesMachine"]=capacityMachineArray;
+          this.actualUserCapacities["capacitiesMachine"]=capacityMachineObj;
           this.emitCapaSubject;
+          console.log("actualUserCapacities" ,this.actualUserCapacities)
         }
       )
   }
