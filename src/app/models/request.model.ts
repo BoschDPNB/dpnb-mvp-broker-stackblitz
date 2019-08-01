@@ -9,6 +9,7 @@ export class Request {
     public product_id: string,
     public amount: number,
     public delivery_date: Date,
+    public earliest_delivery_date: Date,
     public max_price: number,
     public min_rating: number,
     public required_qualifications: string[],

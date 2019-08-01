@@ -30,6 +30,7 @@ export class DemandRegistrationComponent implements OnInit {
   product_id: FormControl;
   amount: FormControl;
   delivery_date: FormControl;
+  earliest_delivery_date: FormControl;
   max_price: FormControl;
   min_rating: FormControl;
   required_qualifications: FormArray;
@@ -80,6 +81,7 @@ export class DemandRegistrationComponent implements OnInit {
     this.product_id = new FormControl('', Validators.required);
     this.amount = new FormControl('', Validators.required);
     this.delivery_date = new FormControl('');
+    this.earliest_delivery_date= new FormControl('');
     this.max_price = new FormControl('');
     this.min_rating = new FormControl('');
     this.required_qualifications = new FormArray(formControlsQ);
@@ -92,6 +94,7 @@ export class DemandRegistrationComponent implements OnInit {
       'product_id': this.product_id,
       'amount': this.amount,
       'delivery_date': this.delivery_date,
+      'earliest_delivery_date':this.earliest_delivery_date,
       'max_price': this.max_price,
       'min_rating': this.min_rating,
       required_qualifications: new FormArray(formControlsQ),
@@ -113,6 +116,7 @@ export class DemandRegistrationComponent implements OnInit {
       demandData['product_id'],
       demandData['amount'],
       demandData['delivery_date'],
+      demandData['earliest_delivery_date'],
       demandData['max_price'],
       demandData['min_rating'],
       this.convertQualif(demandData),

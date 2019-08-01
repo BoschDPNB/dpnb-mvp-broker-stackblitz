@@ -23,6 +23,10 @@ export class OffersService {
     return this.order.delivery_date;  
   }
 
+  getEarliestDelDate(){
+    return this.order.earliest_delivery_date;  
+  }
+
   getAmount(){
     return this.order.amount;
   }
