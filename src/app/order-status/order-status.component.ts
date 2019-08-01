@@ -12,6 +12,7 @@ export class OrderStatusComponent implements OnInit {
   order_id: String ;
   temperature: number;
   dispersion: number;
+  order_status: String;
 
 
   constructor(
@@ -25,6 +26,7 @@ export class OrderStatusComponent implements OnInit {
     this.ngOnInit();
     this.temperature=null;
     this.dispersion=null;    
+    this.order_status=null;
   }
 
   ngOnInit() {
@@ -45,6 +47,9 @@ export class OrderStatusComponent implements OnInit {
             }
             if(response[this.order_id]["status"]["dispersion"]){
               this.dispersion=response[this.order_id]["status"]["dispersion"];
+            }
+             if(response[this.order_id]["status"]["order_status"]){
+              this.order_status=response[this.order_id]["status"]["order_status"];
             }
       })
     }

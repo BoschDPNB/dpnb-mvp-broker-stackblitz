@@ -113,7 +113,7 @@
   <ng-template #transport>
     <div class = "capa" *ngIf="registrationForm.controls.role.value=='transport'">
   <h3> Für Transportdienstleister: </h3>
-	<h4> Fahrzeugstype: </h4>
+	<h4> Fahrzeugklassen: </h4>
       	<div formArrayName="trucks"
         	*ngFor="let type of registrationForm.controls.trucks.controls; let i=index">
           <label> Anzahl an {{ truck_arr[i].type }} </label>

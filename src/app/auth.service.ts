@@ -55,7 +55,7 @@ export class AuthService {
             this.router.navigate(['/user-stats']);
           }
           else{
-            window.alert("Anmeldungdaten wurden nicht erkannt")
+            window.alert("Anmeldedaten wurden nicht erkannt")
           }
         }
       )
@@ -97,13 +97,16 @@ export class AuthService {
               for(let di in response[userId][name][elt]["discounts"]){
                 discounts.push( {
                   percentage: response[userId][name][elt]["discounts"][di]["percentage"],
+                  capacity: response[userId][name][elt]["discounts"][di]["capacity"],
                   date: response[userId][name][elt]["discounts"][di]["date"],
+                  enddate: response[userId][name][elt]["discounts"][di]["enddate"],
                 })     
               }
             }
           }
           let newCapa:CapacityMachine={
             default_price: response[userId][name]["default_price"],
+            setup_price: response[userId][name]["setup_price"],
             min_price: response[userId][name]["min_price"],
             discounts: discounts,
           }

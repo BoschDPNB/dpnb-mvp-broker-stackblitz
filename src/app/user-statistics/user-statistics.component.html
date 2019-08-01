@@ -11,18 +11,21 @@
       <div>
         {{ loggedUser.company_address.nb }} {{ loggedUser.company_address.street }}, {{ loggedUser.company_address.postal_code }} {{ loggedUser.company_address.city }}
       </div>
-
+ <br/>
   <div class="userPrices">
     <h3>Preis- und Kapazitätsinformationen </h3>
-    <ng-container *ngIf="loggedUser.role=='production'"> <span class="higherWeight">Materialkost:  </span>  {{ capacities.material_cost }} €/kg</ng-container>
+    <ng-container *ngIf="loggedUser.role=='production'"> <span class="higherWeight">Materialkosten:  </span>  {{ capacities.material_cost }} €/kg</ng-container>
     <ng-container *ngFor="let mach of categories; let i=index"> 
       <h4>{{ machine_eq[mach] }}</h4>
       <span class="higherWeight"> Standardpreis: </span> {{ capacities.capacitiesMachine[mach].default_price }} <span *ngIf="loggedUser.role=='production' else transportPrice"> €/Minute </span> <ng-template #transportPrice> €/km </ng-template> <br/>
       <span *ngIf="loggedUser.role=='transport'"> <span class="higherWeight"> Minimalpreis: </span> {{ capacities.capacitiesMachine[mach].min_price }} € </span> 
+      <span *ngIf="loggedUser.role=='production'"> <span class="higherWeight"> Rüstkosten: </span> {{ capacities.capacitiesMachine[mach].setup_price }} € </span> 
       <div class="inlineH">
         <div *ngFor="let disc of capacities.capacitiesMachine[mach].discounts" class="discount">
          <div *ngIf="disc.date"> 
-           <span class="higherWeight">Datum: </span> {{ disc.date }} <br/>
+           <span class="higherWeight">Startdatum: </span> {{ disc.date }} <br/>
+           <span class="higherWeight">Enddatum: </span> {{ disc.enddate }}<br/>
+           <span class="higherWeight">Kapazität (in h): </span> {{ disc.capacity }}<br/>
            <span class="higherWeight">Aufschlag (in %): </span> {{ disc.percentage }}
           </div>
        </div>

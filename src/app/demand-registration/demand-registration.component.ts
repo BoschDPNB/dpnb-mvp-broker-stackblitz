@@ -45,13 +45,17 @@ export class DemandRegistrationComponent implements OnInit {
 
   requiredAbilities = [
     //{ id: 'ASSEMBLY_ASSISTANT', item: 'Montageassistent wird benötigt'},
-    { id: 'GEFAHRGUT', item: 'Gefahrgutvorkehrungen wird benötigt'},
+    { id: 'GEFAHRGUT', item: 'Gefahrgutvorkehrung wird benötigt'},
+    { id: 'PALETTENANSCHLAGLEISTE', item: 'Palettenanschlagleiste wird benötigt'},
+    { id: 'HEBEBUHNE', item: 'Hebebühne wird benötigt'},
   ];
 
   qualityMetrics = [
     { id: 'temperature', item: 'Temperatur'},
     { id: 'dispersion', item: 'Maximale Maßabweichung'},
   ];
+
+    
 
   constructor(
     private formBuilder: FormBuilder,
@@ -142,14 +146,19 @@ export class DemandRegistrationComponent implements OnInit {
     );
     
     if(demandData['quality_measurements'][0]==true && demandData['quality_measurements'][1]==true){
-      const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, temperature:  Math.round((18+Math.random()*5)*100)/100 }
+      const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, temperature:  Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird produziert"}
     }
     else{
       if(demandData['quality_measurements'][0]==true){
-        const metrics = {temperature: Math.round((18+Math.random()*5)*100)/100 }
+        const metrics = {temperature: Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird transportiert" }
       }
+
       if(demandData['quality_measurements'][1]==true){
-        const metrics = {dispersion: Math.round((Math.random()*2)*100)/100}
+        const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, order_status: "Auftrag wird transportiert"}
+      }
+      if(demandData['quality_measurements'][0]==false&&demandData['quality_measurements'][1]==false)
+      {
+        const metrics = {order_status: "Auftrag wird transp"}
       }
     }
     

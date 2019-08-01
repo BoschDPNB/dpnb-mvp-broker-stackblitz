@@ -5,6 +5,11 @@
 <p class = "center"> Auftrags-ID : {{ order_id }} 
 </p>
 <div class ="frame">
+  <h3>Auftragsstatus:</h3>
+  <div>
+    <span class="higherWeight"> Aktueller Status: </span> {{ order_status }}
+  </div>
+
   <h3>Qualitätsmetriken:</h3>
   <div *ngIf="temperature">
     <span class="higherWeight"> Temperatur: </span> {{ temperature }} Grad

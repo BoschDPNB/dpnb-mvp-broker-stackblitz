@@ -48,7 +48,9 @@ export class PriceManagementComponent implements OnInit {
     const control = <FormArray>this.priceManagementForm.controls['discounts'];
     control.push(this.formBuilder.group({
         date: [''],
+        enddate: [''],
         percentage: [''],
+        capacity: [''],
         availability: ['']
       }));
   }
@@ -85,7 +87,9 @@ export class PriceManagementComponent implements OnInit {
       discounts: this.formBuilder.array([
         this.formBuilder.group({
           date: [''],
+          enddate: [''],
           percentage: [''],
+          capacity: [''],
           availability : ['']
         }),
         
@@ -208,22 +212,60 @@ export class PriceManagementComponent implements OnInit {
     )
   }
 
+
+  onSubmitSetupPrice(setuppreis, k){
+    const setupprice= setuppreis.value;
+    const id = this.loggedUser['id'];
+    this.httpClient
+      .put('https://dpnb-mvp.firebaseio.com//capacities/'+id+'/'+this.categories[k]+'/setup_price.json', setupprice)
+      .subscribe(
+        (val) => {
+          console.warn('Your data have been submitted', setupprice);
+        },
+        error => {
+          console.log('Erreur ! : ' + error);
+        },
+        () =>{
+          console.log('Data saved');
+        },
+      ); 
+    setuppreis.value="";
+    window.scrollTo(0, 0);
+    document.getElementById("confirmation").style.display="inline";
+    setTimeout(
+      ()=>{
+        document.getElementById("confirmation").style.display="none";
+      }, 4000
+    )
+  }
+
   getDiscounts(priceData){
     let res = [];
     
     for (let a in priceData['discounts']){
       console.log(priceData['discounts'][a]);
-      if((priceData['discounts'][a]['availability'])===""){
-        let  perc= priceData['discounts'][a]['percentage']}
+       if((priceData['discounts'][a]['capacity'])==""){
+
+        let capa =999;
+
+        }
       else{
-        let perc =999;
+        
+        let capa =priceData['discounts'][a]['capacity'];
+      }
+      if((priceData['discounts'][a]['availability'])===""){
+        }
+      else{
+        let capa =0;
       }
       if((priceData['discounts'][a]['date'])===""){
         continue;}
       else{
         res.push({
-          date: priceData['discounts'][a]['date'], 
-          percentage: perc,
+          date: priceData['discounts'][a]['date'],
+          enddate: priceData['discounts'][a]['enddate'],
+          capacity: capa,  
+          percentage: priceData['discounts'][a]['percentage'],
         })
       }
     }
