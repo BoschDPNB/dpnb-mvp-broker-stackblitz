@@ -105,9 +105,11 @@
     </div>
 
     <h4> Montage: </h4>
-    <label> {{ capability_arr[0].item }} </label>
-		<input type="checkbox" formControlName="abilities" > 
-    <br/>		
+        <div formArrayName="abilitiesAssembly" *ngFor="let ability of registrationForm.controls.abilitiesAssembly.controls; let i=index">
+        <label> {{ abilities_a[i].ability }} </label>
+		    <input type="checkbox" [formControlName]="i" >
+      	<br/>	
+    	  </div>	
   </div>
 
   <ng-template #transport>
@@ -121,7 +123,7 @@
           <br/>		
       	</div>
       	<h4> Fähigkeiten: </h4>
-        <div formArrayName="abilitiesTransport" *ngFor="let abilitiy of registrationForm.controls.abilitiesTransport.controls; let i=index">
+        <div formArrayName="abilitiesTransport" *ngFor="let ability of registrationForm.controls.abilitiesTransport.controls; let i=index">
         <label> {{ abilities_t[i].ability }} </label>
 		    <input type="checkbox" [formControlName]="i" >
       	<br/>	

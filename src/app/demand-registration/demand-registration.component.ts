@@ -44,14 +44,13 @@ export class DemandRegistrationComponent implements OnInit {
   ];
 
   requiredAbilities = [
-    //{ id: 'ASSEMBLY_ASSISTANT', item: 'Montageassistent wird benötigt'},
     { id: 'GEFAHRGUT', item: 'Gefahrgutvorkehrung wird benötigt'},
     { id: 'PALETTENANSCHLAGLEISTE', item: 'Palettenanschlagleiste wird benötigt'},
     { id: 'HEBEBUHNE', item: 'Hebebühne wird benötigt'},
   ];
 
   qualityMetrics = [
-    { id: 'temperature', item: 'Temperatur'},
+    { id: 'temperature', item: 'Durchschnittl. Drucktemperatur'},
     { id: 'dispersion', item: 'Maximale Maßabweichung'},
   ];
 

@@ -25,7 +25,7 @@ export class SupplierRegistrationComponent implements OnInit {
   role: FormControl;
   machines: FormArray;
   trucks: FormArray;
-  abilities: FormControl;
+  abilitiesAssembly: FormArray;
   abilitiesTransport: FormArray;
   company_address: FormGroup;
   street: FormControl;
@@ -55,8 +55,10 @@ export class SupplierRegistrationComponent implements OnInit {
     { id: '_40T_FAHRZEUG', type: '40t Fahrzeug'},
   ];
   
-  capability_arr = [
-    { id: 'ASSEMBLY_ASSISTANT', item: 'Montageassistent vorhanden'},
+  abilities_a = [
+ 
+    { id: 'ASSEMBLY_TOOLS', ability: 'Montagewerkzeug vorhanden'},
+    { id: 'ASSEMBLY_ASSISTANT', ability: 'Montageassistent vorhanden'},
   ];
 
   abilities_t = [
@@ -82,6 +84,7 @@ export class SupplierRegistrationComponent implements OnInit {
 
     const formControlsQ = this.qualifications_arr.map(control => new FormControl(false));
     const formControlsM = this.machines_arr.map(control => new FormControl(false));
+    const formControlsA = this.abilities_a.map(control => new FormControl(false));
     const formControlsT = this.abilities_t.map(control => new FormControl(false));
     const formControlsF = this.truck_arr.map(control => new FormControl(false));
 
@@ -102,7 +105,7 @@ export class SupplierRegistrationComponent implements OnInit {
     );
     this.qualifications = new FormArray(formControlsQ);
     this.role = new FormControl('', Validators.required);
-    this.abilities = new FormControl('');
+    this.abilitiesAssembly = new FormArray(formControlsA);
     this.abilitiesTransport = new FormArray(formControlsT);
       
     this.registrationForm = this.formBuilder.group({
@@ -114,7 +117,7 @@ export class SupplierRegistrationComponent implements OnInit {
       'role': this.role,
       machines: new FormArray(formControlsM),
       trucks: new FormArray(formControlsF),
-      'abilities': '',
+      'abilitiesAssembly': this.abilitiesAssembly,
       'abilitiesTransport': this.abilitiesTransport,
     });
   }
@@ -229,9 +232,14 @@ convertCapaT(supplierData) : string[] {
 //capacities of production suppliers
 convertCapa(supplierData) : string[] {
   let res = [];
-  let initCapa = supplierData['abilities'] ;
-  if (initCapa===true){
-    res.push(this.capability_arr[0].id);
+  let initCapa = supplierData['abilitiesAssembly']? supplierData['abilitiesAssembly'] : [];
+  let i = 0;
+  console.log(initCapa);
+   while (i<initCapa.length){
+    if (initCapa[i]===true){
+      res.push(this.abilities_a[i].id);
+    };
+    i++;
   }
   return res;
 }
