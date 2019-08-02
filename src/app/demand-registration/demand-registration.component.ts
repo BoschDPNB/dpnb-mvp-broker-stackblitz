@@ -145,19 +145,19 @@ export class DemandRegistrationComponent implements OnInit {
     );
     
     if(demandData['quality_measurements'][0]==true && demandData['quality_measurements'][1]==true){
-      const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, temperature:  Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird produziert"}
+      const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, temperature:  Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird produziert", status_date: new Date()}
     }
     else{
       if(demandData['quality_measurements'][0]==true){
-        const metrics = {temperature: Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird transportiert" }
+        const metrics = {temperature: Math.round((18+Math.random()*5)*100)/100, order_status: "Auftrag wird transportiert",status_date: new Date() }
       }
 
       if(demandData['quality_measurements'][1]==true){
-        const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, order_status: "Auftrag wird transportiert"}
+        const metrics = {dispersion: Math.round((Math.random()*2)*100)/100, order_status: "Auftrag wird transportiert",status_date: new Date()}
       }
       if(demandData['quality_measurements'][0]==false&&demandData['quality_measurements'][1]==false)
       {
-        const metrics = {order_status: "Auftrag wird transp"}
+        const metrics = {order_status: "Auftrag wird transportiert",}
       }
     }
     
