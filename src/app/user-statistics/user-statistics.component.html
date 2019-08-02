@@ -11,6 +11,18 @@
       <div>
         {{ loggedUser.company_address.nb }} {{ loggedUser.company_address.street }}, {{ loggedUser.company_address.postal_code }} {{ loggedUser.company_address.city }}
       </div>
+    
+    <span *ngIf="loggedUser.role=='production' else transport">  <h4>Maschinen:</h4> </span> <ng-template #transport>  <h4>Fahrzeuge:</h4> </ng-template>
+    <div>
+      <ng-container
+       *ngFor="let mach of categories; let i=index"> 
+       {{loggedUser.machines[mach]}} mal {{ machine_eq[mach] }}
+       <br/>
+       </ng-container>
+      </div>
+    
+
+
  <br/>
   <div class="userPrices">
     <h3>Preis- und Kapazitätsinformationen </h3>
@@ -25,12 +37,13 @@
          <div *ngIf="disc.date"> 
            <span class="higherWeight">Startdatum: </span> {{ disc.date }} <br/>
            <span class="higherWeight">Enddatum: </span> {{ disc.enddate }}<br/>
-           <span class="higherWeight">Kapazität (in h): </span> {{ disc.capacity }}<br/>
+           <span class="higherWeight">Gesamtkapazität (in h): </span> {{ disc.capacity }}<br/>
            <span class="higherWeight">Aufschlag (in %): </span> {{ disc.percentage }}
           </div>
        </div>
      </div>
     </ng-container>
+  <br/>
   <br/>
   <button type="button" class="nomargin" (click)="goToPriceManagement()"> Preis und Aufschläge aktualisieren </button>
 

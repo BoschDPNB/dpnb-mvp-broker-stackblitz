@@ -132,7 +132,7 @@ export class PriceManagementComponent implements OnInit {
   onSubmitDiscounts(priceData, k){//k is the index of the machine / truck in categories
     
     const newDiscounts = {
-      discounts: this.getDiscounts(priceData),
+      discounts: this.getDiscounts(priceData,k),
     };
     const id = this.loggedUser['id'];
     this.httpClient
@@ -239,7 +239,8 @@ export class PriceManagementComponent implements OnInit {
     )
   }
 
-  getDiscounts(priceData){
+  getDiscounts(priceData,k){
+    
     let res = [];
     
     for (let a in priceData['discounts']){
@@ -250,8 +251,8 @@ export class PriceManagementComponent implements OnInit {
         let s = new Date(priceData['discounts'][a]['date']);
         let diff =(e.getTime() - s.getTime()) / 1000;
         diff /= (60 * 60);
-        let capa= Math.abs(Math.round(diff));
-        
+        let capa= Math.abs(Math.round(diff))*this.loggedUser.machines[this.categories[k]];
+       // let capa= Math.abs(Math.round(diff))
 
         }
       else{

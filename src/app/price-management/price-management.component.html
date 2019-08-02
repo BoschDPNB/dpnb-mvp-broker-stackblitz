@@ -6,13 +6,21 @@
 
   <div *ngIf="loggedUser.role=='production'" class="borderBottom">
     <h3> Materialkosten</h3>
-    <label class="onTheLeft"> Preis pro kg (in €):</label>
-    <input type="number" class="onTheLeft" id="materialKost" #materialKost>
-    <button type="button" (click)="onSubmitMaterialPrice(materialKost)"> Materialkosten aktualisieren </button> <br/><br/>
+    <div class="inline onLeft">
+      <label class="onTheLeft"> Preis pro kg (in €):</label>
+      <input type="number" class="onTheLeft" id="materialKost" #materialKost>
+      <button type="button" (click)="onSubmitMaterialPrice(materialKost)"> Materialkosten aktualisieren </button> <br/><br/>
+    </div>
+    <br/><br/>
+    Zusammengefasste Planung für alle <span *ngIf="loggedUser.role=='production' else transportPrice"> Maschinen </span> <ng-template #transportPrice> Fahrzeuge </ng-template> des selben Typs:
+    <br/><br/>
   </div>
+
+  
   
   <div *ngFor="let item of categories; let k=index" class="borderBottom">
     <h3>{{ machine_eq[item] }} </h3>
+    
 
     <div class="inline onLeft">
       <label for="preis" class="onTheLeft">Standardpreis <span *ngIf="loggedUser.role=='production' else transportPrice"> (€/Minute) </span> <ng-template #transportPrice> (€/km) </ng-template>: </label>
@@ -36,32 +44,37 @@
     <div formArrayName="discounts">
       <h4> Zeitplanung </h4>
     
-      <div class="aufschlag" *ngFor="let adress of priceManagementForm.controls.discounts.controls;   let i = index"      [formGroupName]="i">
-        <div>
-          <label class="date" for="von1">Vom:</label>
-          <input type="date" id="von1" formControlName="date"> 
-        </div>
-
-         <div>
-          <label class="date" for="bis1">Bis:</label>
-          <input type="date" id="bis1" formControlName="enddate"> 
-        </div>
-        <br/>
-        <div>
-          <label for="kapazität1">Kapazität (in h):</label>
-          <input type="number"  id="kapazität1" formControlName="capacity"> 
+      <div  *ngFor="let adress of priceManagementForm.controls.discounts.controls;   let i = index"      [formGroupName]="i">
+        <div class="inline onLeft">
+          <label for= "von1"  class="onTheLeft"> Vom:</label>
+          <input type="date" class="onTheLeft" id="von1" formControlName="date">  
         </div>
         
-        <div>
-          <label for="aufschlag1">Aufschlag (in %):</label>
-          <input type="number"   id="aufschlag1" formControlName="percentage"> 
+         <div class="inline onLeft">
+          <label for="bis1" class="onTheLeft">Bis:</label>
+          <input type="date" class="onTheLeft" id="bis1" formControlName="enddate">
+      
         </div>
+        <div class="inline onLeft">
+          <label for="avail" class="onTheLeft">Nicht verfügbar </label>
+          <input type="checkbox"  class="onTheLeft" id="avail" formControlName="availability"> 
+        </div>
+        
+        
+        <div class="inline onLeft">
+          <label for="kapazität1" class="onTheLeft">Gesamtkapazität (in h):</label>
+          <input type="number"  class="onTheLeft" id="kapazität1" formControlName="capacity"> 
+        </div>
+        
        
-        <div>
-          <label for="avail">Nicht verfügbar </label>
-          <input type="checkbox"  id="avail" formControlName="availability"> 
+        <div class="inline onLeft">
+          <label for="aufschlag1" class="onTheLeft">Aufschlag (in %):</label>
+          <input type="number"    class="onTheLeft" id="aufschlag1" formControlName="percentage"> 
         </div>
+      
+      
 
+       
         <br/><br/>
       </div>
     </div>
