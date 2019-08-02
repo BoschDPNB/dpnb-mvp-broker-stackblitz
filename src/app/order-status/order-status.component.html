@@ -6,9 +6,12 @@
 </p>
 <div class ="frame">
   <h3>Auftragsstatus:</h3>
-  <div>
+  <div *ngIf="order_status">
     <span class="higherWeight"> {{ status_date | date}} : </span> {{ order_status }}
-   
+  </div>
+
+   <div *ngIf="!order_status">
+    Auftrag wurde nicht gefunden.
   </div>
 
   <h3>Qualitätsmetriken:</h3>
