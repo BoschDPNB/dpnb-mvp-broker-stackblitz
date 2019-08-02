@@ -246,7 +246,8 @@ export class PriceManagementComponent implements OnInit {
       console.log(priceData['discounts'][a]);
        if((priceData['discounts'][a]['capacity'])==""){
 
-        let capa = priceData['discounts'][a]['enddate'].getTime();
+        let a = new Date(priceData['discounts'][a]['enddate']);
+        let capa = a
 
         }
       else{
