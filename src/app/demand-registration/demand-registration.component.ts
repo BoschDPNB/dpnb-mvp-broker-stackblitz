@@ -157,7 +157,7 @@ export class DemandRegistrationComponent implements OnInit {
       }
       if(demandData['quality_measurements'][0]==false&&demandData['quality_measurements'][1]==false)
       {
-        const metrics = {order_status: "Auftrag wird transportiert",}
+        const metrics = {order_status: "Auftrag wird transportiert",status_date: new Date()}
       }
     }
     

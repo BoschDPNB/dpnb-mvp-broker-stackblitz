@@ -7,8 +7,8 @@
 <div class ="frame">
   <h3>Auftragsstatus:</h3>
   <div>
-    <span class="higherWeight"> Aktueller Status: </span> {{ order_status }}
-    <span class="higherWeight"> Zeitpunkt: </span> {{ status_date }}
+    <span class="higherWeight"> {{ status_date | date}} : </span> {{ order_status }}
+   
   </div>
 
   <h3>Qualitätsmetriken:</h3>

@@ -54,7 +54,7 @@ export class OrderStatusComponent implements OnInit {
               this.order_status=response[this.order_id]["status"]["order_status"];
             }
             if(response[this.order_id]["status"]["status_date"]){
-              this.order_status=response[this.order_id]["status"]["status_date"];
+              this.status_date=response[this.order_id]["status"]["status_date"];
             }
       })
     }
