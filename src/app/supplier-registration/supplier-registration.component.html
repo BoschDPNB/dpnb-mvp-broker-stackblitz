@@ -114,6 +114,14 @@
 		    <input type="checkbox" [formControlName]="i" >
       	<br/>	
     	  </div>	
+    <h4> Montagetools: </h4>
+        <div formArrayName="tools" *ngFor="let type of registrationForm.controls.tools.controls; let i=index">
+        <label> {{ tools_a[i].type }} </label>
+		    <input type="checkbox" [formControlName]="i" >
+      	<br/>	
+    	  </div>
+
+
   </div>
 
   <ng-template #transport>
@@ -126,7 +134,7 @@
           <input type="number" [formControlName]="i" > 
           <br/>		
       	</div>
-      	<h4> Fähigkeiten: </h4>
+      	<h4> Transportfähigkeiten: </h4>
         <div formArrayName="abilitiesTransport" *ngFor="let ability of registrationForm.controls.abilitiesTransport.controls; let i=index">
         <label> {{ abilities_t[i].ability }} </label>
 		    <input type="checkbox" [formControlName]="i" >

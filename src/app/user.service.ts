@@ -61,7 +61,8 @@ export class UserService {
               machines: response[obj]['machines'],
               qualifications: response[obj]['qualifications'],
               role: response[obj]['role'],
-              abilities: response[obj]['abilities']
+              abilities: response[obj]['abilities'],
+              tools: response[obj]['tools']
             });
           }
           this.emitUsers();

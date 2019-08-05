@@ -251,7 +251,8 @@ export class PriceManagementComponent implements OnInit {
         let s = new Date(priceData['discounts'][a]['date']);
         let diff =(e.getTime() - s.getTime()) / 1000;
         diff /= (60 * 60);
-        let capa= Math.abs(Math.round(diff))*this.loggedUser.machines[this.categories[k]];
+        let capa= Math.abs(Math.round(diff));
+        //*this.loggedUser.machines[this.categories[k]];
        // let capa= Math.abs(Math.round(diff))
 
         }

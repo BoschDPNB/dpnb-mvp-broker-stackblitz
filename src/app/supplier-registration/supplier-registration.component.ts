@@ -27,6 +27,7 @@ export class SupplierRegistrationComponent implements OnInit {
   trucks: FormArray;
   abilitiesAssembly: FormArray;
   abilitiesTransport: FormArray;
+  tools: FormArray;
   company_address: FormGroup;
   street: FormControl;
   nb: FormControl;
@@ -60,13 +61,17 @@ export class SupplierRegistrationComponent implements OnInit {
     { id: 'ASSEMBLY_STICKING', ability: 'Kleben'},
     { id: 'ASSEMBLY_SCREWING', ability: 'Verschrauben'},
     { id: 'ASSEMBLY_WELDING', ability: 'Schweißen'},
-    { id: 'ASSEMBLY_SO', ability: 'Löten'},
+    { id: 'ASSEMBLY_SOLDERING', ability: 'Löten'},
   ];
 
   abilities_t = [
     { id: 'PALETTENANSCHLAGLEISTE', ability: 'Palettenanschlagleiste vorhanden'},
     { id: 'HEBEBUHNE', ability: 'Hebebühne  vorhanden'},
     { id: 'GEFAHRGUT', ability: 'Gefahrgutvorkehrungen  vorhanden'},
+  ];
+
+    tools_a = [
+    { id: 'ASSEMBLY_ASSISTANT', type: 'Montageassistent'},
   ];
 
  
@@ -88,6 +93,7 @@ export class SupplierRegistrationComponent implements OnInit {
     const formControlsM = this.machines_arr.map(control => new FormControl(false));
     const formControlsA = this.abilities_a.map(control => new FormControl(false));
     const formControlsT = this.abilities_t.map(control => new FormControl(false));
+    const formControlsTA = this.tools_a.map(control => new FormControl(false));
     const formControlsF = this.truck_arr.map(control => new FormControl(false));
 
     this.username = new FormControl('', [Validators.required, UserNameValidator(this.userService.getUsers())]);
@@ -109,6 +115,7 @@ export class SupplierRegistrationComponent implements OnInit {
     this.role = new FormControl('', Validators.required);
     this.abilitiesAssembly = new FormArray(formControlsA);
     this.abilitiesTransport = new FormArray(formControlsT);
+    this.tools = new FormArray(formControlsTA);
       
     this.registrationForm = this.formBuilder.group({
       'username': this.username,
@@ -121,6 +128,7 @@ export class SupplierRegistrationComponent implements OnInit {
       trucks: new FormArray(formControlsF),
       'abilitiesAssembly': this.abilitiesAssembly,
       'abilitiesTransport': this.abilitiesTransport,
+      'tools' : this.tools,
     });
   }
 
@@ -147,6 +155,7 @@ export class SupplierRegistrationComponent implements OnInit {
       this.convertQualif(supplierData),
       supplierData['role'],
       capa,
+      this.convertTools(supplierData),
     );
     console.warn('Your data have been submitted', newSupplier);
     this.userService.saveOneUserToServer(newSupplier);
@@ -240,6 +249,21 @@ convertCapa(supplierData) : string[] {
    while (i<initCapa.length){
     if (initCapa[i]===true){
       res.push(this.abilities_a[i].id);
+    };
+    i++;
+  }
+  return res;
+}
+
+//capacities of production suppliers
+convertTools(supplierData) : string[] {
+  let res = [];
+  let initCapa = supplierData['tools']? supplierData['tools'] : [];
+  let i = 0;
+  console.log(initCapa);
+   while (i<initCapa.length){
+    if (initCapa[i]===true){
+      res.push(this.tools_a[i].id);
     };
     i++;
   }

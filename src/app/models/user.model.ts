@@ -14,11 +14,13 @@ export class User {
     public trucks: Trucks,
     public qualifications: string[],
     public role: string,
-    public abilities: string[]
+    public abilities: string[],
+    public tools: string[]
   ) {}
 
   updateUser (user : User) {
     this.abilities = user.abilities;
+    this.tools = user.tools;
     this.company_address = user.company_address;
     this.company_name = user.company_name;
     this.machines = user.machines;

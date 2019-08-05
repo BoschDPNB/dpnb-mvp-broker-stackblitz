@@ -42,7 +42,7 @@
 
   <form [formGroup]="priceManagementForm" (ngSubmit) = "onSubmitDiscounts(priceManagementForm.value, k)" class="noborder">
     <div formArrayName="discounts">
-      <h4> Zeitplanung </h4>
+      <h4> Zeitplanung (für eine individuelle Maschine) </h4>
     
       <div  *ngFor="let adress of priceManagementForm.controls.discounts.controls;   let i = index"      [formGroupName]="i">
         <div class="inline onLeft">
