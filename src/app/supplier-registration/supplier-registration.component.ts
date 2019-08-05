@@ -57,7 +57,10 @@ export class SupplierRegistrationComponent implements OnInit {
   
   abilities_a = [
  
-    { id: 'ASSEMBLY_ASSISTANT', ability: 'Montageassistent vorhanden'},
+    { id: 'ASSEMBLY_STICKING', ability: 'Kleben'},
+    { id: 'ASSEMBLY_SCREWING', ability: 'Verschrauben'},
+    { id: 'ASSEMBLY_WELDING', ability: 'Schweißen'},
+    { id: 'ASSEMBLY_SO', ability: 'Löten'},
   ];
 
   abilities_t = [
