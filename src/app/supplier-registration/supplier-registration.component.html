@@ -106,7 +106,9 @@
       <br/>		
     </div>
 
-    <h4> Montage: </h4>
+    <h4> Montagefähigket: </h4>
+
+    <h4> Montagetools: </h4>
         <div formArrayName="abilitiesAssembly" *ngFor="let ability of registrationForm.controls.abilitiesAssembly.controls; let i=index">
         <label> {{ abilities_a[i].ability }} </label>
 		    <input type="checkbox" [formControlName]="i" >
