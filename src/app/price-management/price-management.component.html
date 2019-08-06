@@ -12,8 +12,6 @@
       <button type="button" (click)="onSubmitMaterialPrice(materialKost)"> Materialkosten aktualisieren </button> <br/><br/>
     </div>
     <br/><br/>
-    Zusammengefasste Planung für alle <span *ngIf="loggedUser.role=='production' else transportPrice"> Maschinen </span> <ng-template #transportPrice> Fahrzeuge </ng-template> des selben Typs:
-    <br/><br/>
   </div>
 
   
@@ -42,7 +40,7 @@
 
   <form [formGroup]="priceManagementForm" (ngSubmit) = "onSubmitDiscounts(priceManagementForm.value, k)" class="noborder">
     <div formArrayName="discounts">
-      <h4> Zeitplanung (für eine individuelle Maschine) </h4>
+      <h4> Zeitplanung </h4>
     
       <div  *ngFor="let adress of priceManagementForm.controls.discounts.controls;   let i = index"      [formGroupName]="i">
         <div class="inline onLeft">

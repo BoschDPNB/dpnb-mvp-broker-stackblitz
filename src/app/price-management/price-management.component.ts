@@ -19,7 +19,7 @@ export class PriceManagementComponent implements OnInit {
   userSubscription: Subscription;
   public myGroup: FormGroup;
   public priceManagementForm: FormGroup;
-  categories: String[]; //either machines or trucks
+  categories: String[]; //either machines, trucks or assembly
 
   machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
   truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];

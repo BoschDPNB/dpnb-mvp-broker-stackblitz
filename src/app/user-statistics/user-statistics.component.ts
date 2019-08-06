@@ -20,7 +20,9 @@ export class UserStatisticsComponent implements OnInit {
   capaSubscription: Subscription;
   matCostSubscription: Subscription;
   material_cost: number;
-  categories: String[]; //trucks or machines
+  categories: String[]; //trucks, machines or assembly
+  categories_mach: String[]; //trucks or machines
+  categories_ass: String[]; //assembly
 
   constructor(
     private authService: AuthService,
@@ -39,8 +41,19 @@ export class UserStatisticsComponent implements OnInit {
     _40T_FAHRZEUG:"LKW 40to",
     ASSEMBLY: "Montagekapazität",
   }
+
+  assembly_eq={
+    ASSEMBLY_STICKING:"Kleben",
+    ASSEMBLY_SCREWING: "Verschrauben",
+    ASSEMBLY_WELDING: "Schweißen",
+    ASSEMBLY_SOLDERING: "Löten",
+  }
+
+
+
   machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
   truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];
+  assembly_list=["ASSEMBLY_STICKING","ASSEMBLY_SCREWING","ASSEMBLY_WELDING","ASSEMBLY_SOLDERING"];
   
   ngOnInit() {
     if(this.authService.getActualUser()){
@@ -49,21 +62,30 @@ export class UserStatisticsComponent implements OnInit {
           this.loggedUser = user;
           if(user.role=="production" && user.machines){
             this.categories=[];
+            this.categories_mach=[];
+            this.categories_ass=[];
             for(let item in this.machine_list){
               if(user.machines[this.machine_list[item]]>0){
                 this.categories.push(this.machine_list[item])
+                this.categories_mach.push(this.machine_list[item])
               }
               
             };
-           
-              this.categories.push("ASSEMBLY")
-            
+            this.categories.push("ASSEMBLY")
+            for(let item in this.assembly_list){
+              if(user.abilities[this.assembly_list[item]]>){
+                this.categories_ass.push(this.assembly_list[item])
+              }
+            };
+
           }
           else{ if(user.trucks){
             this.categories=[];
+            this.categories_mach=[];
             for(let item in this.truck_list){
               if(user.trucks[this.truck_list[item]]>0){
                 this.categories.push(this.truck_list[item])
+                this.categories_mach.push(this.truck_list[item])
               }
               
             };

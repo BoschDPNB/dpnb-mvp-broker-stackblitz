@@ -12,17 +12,41 @@
         {{ loggedUser.company_address.nb }} {{ loggedUser.company_address.street }}, {{ loggedUser.company_address.postal_code }} {{ loggedUser.company_address.city }}
       </div>
     
-    <span *ngIf="loggedUser.role=='production' else transport">  <h4>Maschinen:</h4> </span> <ng-template #transport>  <h4>Fahrzeuge:</h4> </ng-template>
+    <span *ngIf="loggedUser.role=='production'">  <h4>Maschinen:</h4>    
     <div>
       <ng-container
-       *ngFor="let mach of categories; let i=index"> 
+       *ngFor="let mach of categories_mach; let i=index"> 
        {{loggedUser.machines[mach]}} mal {{ machine_eq[mach] }}
        <br/>
        </ng-container>
+      </div> </span>
+
+      <span *ngIf="loggedUser.role=='transport'">  <h4>Fahrzeuge:</h4>    
+    <div>
+      <ng-container
+       *ngFor="let mach of categories_mach; let i=index"> 
+       {{loggedUser.trucks[mach]}} mal {{ machine_eq[mach] }}
+       <br/>
+       </ng-container>
+      </div> </span>
+
+
+      <span *ngIf="loggedUser.role=='production'">
+         <h4>Montagefähigkeiten:</h4>
+      <div>
+      <ng-container
+       *ngFor="let mach of categories_ass; let i=index"> 
+       {{ assembly_eq[mach] }}
+       <br/>
+       </ng-container>
       </div>
+       </span>
+     
+
     
 
 
+ <br/>
  <br/>
   <div class="userPrices">
     <h3>Preis- und Kapazitätsinformationen </h3>
