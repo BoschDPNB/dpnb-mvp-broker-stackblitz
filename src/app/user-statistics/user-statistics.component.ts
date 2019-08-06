@@ -74,11 +74,12 @@ export class UserStatisticsComponent implements OnInit {
             if(user.abilities[0]!=""){
               this.categories.push("ASSEMBLY")
             }
-            for(let item in this.assembly_list){
-              if(user.abilities[0]==this.assembly_list[item]){
-                this.categories_ass.push(this.assembly_list[item])
-              }
-            };
+            for(let i in user.abilities)  
+              for(let item in this.assembly_list){
+                if(user.abilities[i]==this.assembly_list[item]){
+                  this.categories_ass.push(this.assembly_list[item])
+                }
+              };
 
           }
           else{ if(user.trucks){
