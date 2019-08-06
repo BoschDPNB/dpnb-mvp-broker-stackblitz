@@ -60,7 +60,6 @@ export class SupplierRegistrationComponent implements OnInit {
  
     { id: 'ASSEMBLY_STICKING', ability: 'Kleben'},
     { id: 'ASSEMBLY_SCREWING', ability: 'Verschrauben'},
-    { id: 'ASSEMBLY_WELDING', ability: 'Schweißen'},
     { id: 'ASSEMBLY_SOLDERING', ability: 'Löten'},
   ];
 

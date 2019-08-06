@@ -45,7 +45,6 @@ export class UserStatisticsComponent implements OnInit {
   assembly_eq={
     ASSEMBLY_STICKING:"Kleben",
     ASSEMBLY_SCREWING: "Verschrauben",
-    ASSEMBLY_WELDING: "Schweißen",
     ASSEMBLY_SOLDERING: "Löten",
   }
 
@@ -53,7 +52,7 @@ export class UserStatisticsComponent implements OnInit {
 
   machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
   truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];
-  assembly_list=["ASSEMBLY_STICKING","ASSEMBLY_SCREWING","ASSEMBLY_WELDING","ASSEMBLY_SOLDERING"];
+  assembly_list=["ASSEMBLY_STICKING","ASSEMBLY_SCREWING",,"ASSEMBLY_SOLDERING"];
   
   ngOnInit() {
     if(this.authService.getActualUser()){
