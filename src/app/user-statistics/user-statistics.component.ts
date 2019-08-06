@@ -37,6 +37,7 @@ export class UserStatisticsComponent implements OnInit {
     PKW_CADDY:"PKW Caddy",
     _7T_FAHRZEUG:"LKW 7,5to",
     _40T_FAHRZEUG:"LKW 40to",
+    ASSEMBLY: "Montagekapazität",
   }
   machine_list=["SMALL_SIMPLEX","SMALL_DUPLEX", "SMALL_SUPPORT", "LARGE_SIMPLEX", "LARGE_DUPLEX", "LARGE_SUPPORT"];
   truck_list=["PKW_CADDY", "_7T_FAHRZEUG", "_40T_FAHRZEUG"];
@@ -54,6 +55,9 @@ export class UserStatisticsComponent implements OnInit {
               }
               
             };
+           
+              this.categories.push("ASSEMBLY")
+            
           }
           else{ if(user.trucks){
             this.categories=[];

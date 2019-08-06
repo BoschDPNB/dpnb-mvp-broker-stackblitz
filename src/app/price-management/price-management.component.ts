@@ -34,6 +34,7 @@ export class PriceManagementComponent implements OnInit {
     PKW_CADDY:"PKW Caddy",
     _7T_FAHRZEUG:"LKW 7,5to",
     _40T_FAHRZEUG:"LKW 40to",
+    ASSEMBLY:"Montagekapazität",
   }
 
   constructor(
@@ -69,6 +70,9 @@ export class PriceManagementComponent implements OnInit {
               }
               
             };
+            
+              this.categories.push("ASSEMBLY")
+            
           }
           else{ if(user.trucks){
             this.categories=[];

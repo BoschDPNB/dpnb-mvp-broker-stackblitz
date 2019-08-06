@@ -14,6 +14,7 @@ export class Capacity {
       PKW_CADDY: CapacityMachine,
       _7T_FAHRZEUG: CapacityMachine,
       _40T_FAHRZEUG: CapacityMachine,
+      ASSEMBLY: CapacityMachine,
     },
     public material_cost: number,
   ) {}
